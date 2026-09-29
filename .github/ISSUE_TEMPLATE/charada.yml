@@ -1,0 +1,36 @@
+name: "Charada"
+description: "Deixe a sua charada. Vale de eletrica, de logica e de engenharia."
+title: "[charada] "
+labels: ["charada"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Deixe a sua charada. Se souber a resposta, **nao escreva ela aqui** —
+        espere alguem tentar. A graca esta na tentativa.
+
+        Vale charada de eletrica, de logica, de engenharia, ou de qualquer
+        coisa que faca pensar.
+
+  - type: textarea
+    id: charada
+    attributes:
+      label: "A charada"
+      description: "Escreva a pergunta. Sem a resposta."
+    validations:
+      required: true
+
+  - type: textarea
+    id: resposta
+    attributes:
+      label: "Resposta (fica escondida por um clique)"
+      description: "Escreva a resposta entre as linhas de baixo. Quem quiser ver, clica em Preview."
+      value: |
+        <details>
+        <summary>Ver a resposta (clique)</summary>
+
+        escreva a resposta aqui
+
+        </details>
+    validations:
+      required: false

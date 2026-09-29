@@ -9,6 +9,22 @@ do método — o código que dá para reusar, sem nenhum dado de cliente.
 
 ---
 
+> ### 🐝 Colmeia aberta: deixe o seu recado
+>
+> A aba [**Issues**](../../issues) está aberta para **recado** e **charada**.
+> Qualquer pessoa com conta no GitHub pode escrever — não precisa ser técnico.
+>
+> - **[recado]** — pergunta, sugestão, correção, ou só um oi.
+> - **[charada]** — uma pergunta que faz pensar. A resposta fica escondida por
+>   um clique, para a graça estar na tentativa.
+>
+> As regras da casa estão em
+> [COMO-FUNCIONA-A-COLMEIA.md](.github/COMO-FUNCIONA-A-COLMEIA.md).
+> A principal: **nunca cole senha, token ou chave numa issue.** Recado aqui é
+> público e indexado por buscador.
+
+---
+
 ## O que tem aqui
 
 | # | Pipeline | Problema de origem |

@@ -1,0 +1,13 @@
+# Configuracao das Issues: a colmeia.
+#
+# blank_issues_enabled: false obriga quem chega a escolher uma caixa. Sem isso,
+# todo mundo cai no campo em branco e o recado chega sem contexto nenhum.
+blank_issues_enabled: false
+
+contact_links:
+  - name: "Recado, pergunta ou sugestao"
+    url: "https://github.com/rgdeletro-alt/engenharia-eletrica-automacao/issues/new?template=recado.yml"
+    about: "Escreva o que quiser. Engenharia, automacao, duvida de instalacao eletrica, ou so um oi."
+  - name: "Charada"
+    url: "https://github.com/rgdeletro-alt/engenharia-eletrica-automacao/issues/new?template=charada.yml"
+    about: "Deixe a sua. Vale charada de eletrica, de logica e de engenharia."

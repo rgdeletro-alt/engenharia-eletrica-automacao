@@ -1,0 +1,20 @@
+name: "Recado, pergunta ou sugestao"
+description: "Deixe o seu recado. Escreva o que quiser."
+title: "[recado] "
+labels: ["recado"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Deixe o seu recado. Pode ser pergunta sobre instalacao eletrica,
+        sugestao sobre um dos pipelines, ou so um oi.
+
+        Nao precisa ser tecnico. Se preferir, escreva em qualquer idioma.
+
+  - type: textarea
+    id: recado
+    attributes:
+      label: "Recado"
+      description: "O que voce quer dizer?"
+    validations:
+      required: true

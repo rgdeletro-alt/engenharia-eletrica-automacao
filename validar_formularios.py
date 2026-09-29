@@ -162,6 +162,56 @@ def validar_config(caminho: Path) -> list[str]:
     return problemas
 
 
+def repositorio_do_git(raiz: Path) -> str | None:
+    """Le o remote origin e devolve 'usuario/repo'. None se nao houver remote."""
+    import re
+    import subprocess
+
+    try:
+        r = subprocess.run(
+            ["git", "-C", str(raiz), "config", "--get", "remote.origin.url"],
+            capture_output=True, text=True, timeout=10,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    url = (r.stdout or "").strip()
+    if not url:
+        return None
+    m = re.search(r"github\.com[:/]+([^/]+)/([^/\s]+?)(?:\.git)?$", url)
+    if not m:
+        return None
+    return f"{m.group(1)}/{m.group(2)}"
+
+
+def validar_links_do_repo(caminho_config: Path, raiz: Path) -> list[str]:
+    """Confere se os links do config.yml apontam para ESTE repositorio.
+
+    Existe por um caso concreto: o config.yml tem o endereco escrito a mao. Se
+    o nome do repositorio mudar, os dois botoes da colmeia levam a lugar
+    nenhum - e o GitHub nao reclama, porque um link quebrado e so um link.
+    """
+    problemas: list[str] = []
+    repo = repositorio_do_git(raiz)
+    if not repo:
+        # Sem remote configurado o teste nao tem contra o que comparar. Isto
+        # nao e falha, mas tambem nao e aprovacao - e um limite declarado.
+        return problemas
+
+    try:
+        dados = yaml.safe_load(caminho_config.read_text(encoding="utf-8")) or {}
+    except yaml.YAMLError:
+        return problemas
+
+    for i, link in enumerate(dados.get("contact_links") or []):
+        url = str((link or {}).get("url", ""))
+        if url and f"github.com/{repo}/" not in url:
+            problemas.append(
+                f"contact_links[{i}] aponta para outro repositorio: {url}\n"
+                f"                 o remote do git e: github.com/{repo}"
+            )
+    return problemas
+
+
 def validar_pasta(pasta: Path) -> tuple[int, int]:
     """Valida a pasta inteira. Devolve (arquivos verificados, falhas)."""
     if not pasta.exists():
@@ -175,10 +225,14 @@ def validar_pasta(pasta: Path) -> tuple[int, int]:
 
     verificados = 0
     falhas = 0
+    raiz = pasta.parent.parent  # .github/ISSUE_TEMPLATE -> raiz do repositorio
+    repo = repositorio_do_git(raiz)
+
     for arquivo in arquivos:
         verificados += 1
         if arquivo.name == "config.yml":
             problemas = validar_config(arquivo)
+            problemas += validar_links_do_repo(arquivo, raiz)
             rotulo = "config"
         else:
             problemas = validar_formulario(arquivo)
@@ -190,6 +244,13 @@ def validar_pasta(pasta: Path) -> tuple[int, int]:
                 print(f"               - {p}")
         else:
             print(f"  OK         {rotulo:10} {arquivo.name}")
+
+    if repo:
+        print(f"\n  remote do git: github.com/{repo}")
+    else:
+        print("\n  AVISO: nenhum remote 'origin' configurado - os links do config.yml")
+        print("         NAO foram conferidos contra o repositorio real. Isto e um")
+        print("         limite do teste, nao uma aprovacao.")
     return verificados, falhas
 
 

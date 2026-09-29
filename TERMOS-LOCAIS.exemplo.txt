@@ -1,0 +1,27 @@
+# ---------------------------------------------------------------------------
+# Termos LOCAIS deste ambiente: o que so faz sentido procurar na maquina de
+# quem roda o scanner.
+#
+# Por que este arquivo existe separado: nome de usuario do sistema, pasta de
+# trabalho e host de tunel sao diferentes para cada pessoa. Deixar isso escrito
+# dentro do codigo faria o scanner publicar exatamente os valores que ele
+# deveria proteger - e nao serviria para mais ninguem.
+#
+# Formato: UMA secao por tipo, uma linha por termo. Linha com # e comentario.
+# Quem for usar este scanner noutra maquina troca o conteudo deste arquivo.
+# ---------------------------------------------------------------------------
+
+[USUARIO]
+# Nome da pasta de usuario do sistema, e variacoes que aparecem em codigo.
+# Exemplo (o valor real NAO entra aqui): joaosilva
+USUARIO_DO_SISTEMA
+
+[PASTA_DE_TRABALHO]
+# Nome da pasta raiz de trabalho, sem o drive.
+# Exemplo: Pasta de Trabalho
+PASTA-DE-TRABALHO
+
+[HOST]
+# Host de tunel, VPS ou nome interno que aparece em URL.
+# Exemplo: meuacesso.minhadomain.invalid
+host.interno.invalid

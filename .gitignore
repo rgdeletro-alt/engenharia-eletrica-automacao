@@ -1,0 +1,107 @@
+# ============================================================================
+# O que NUNCA entra neste repositorio.
+#
+# Nao e lista de higiene: cada linha existe porque o arquivo correspondente
+# existe de verdade na maquina de origem e ja estava a um "git add ." de virar
+# publico. Verificado por varredura em 29/09/2026: 2.271 arquivos da arvore de
+# trabalho tinham conteudo que nao pode ser publico.
+#
+# REGRA: este repositorio nasce vazio e recebe arquivo escolhido a dedo. Nunca
+# faca `git add .` ou `git add -A` a partir de uma pasta de trabalho.
+# ============================================================================
+
+# --- credenciais: qualquer coisa que de acesso a alguma coisa ---------------
+*.env
+.env.*
+!.env.exemplo
+*.key
+*.pem
+*.pfx
+*.p12
+*.jks
+*.keystore
+*credencial*
+*credential*
+*secret*
+*segredo*
+*.token
+*token*.json
+senha*.txt
+*senhas*
+*password*
+
+# --- sessao autenticada de servico -----------------------------------------
+# A pasta de sessao do WhatsApp tem 1,47 GB e 6.910 arquivos. Carrega a sessao
+# autenticada inteira: quem copia, entra. Nunca versionar.
+*sw_col.json
+*session*.json
+*sessoes/
+*sessions/
+auth_info*/
+.wwebjs_auth/
+.wwebjs_cache/
+
+# --- segredo de configuracao do editor e do sistema ------------------------
+.vscode/settings.json
+*.code-workspace
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# --- dado de cliente, em qualquer formato ----------------------------------
+# Conversa, audio transcrito, planilha de obra, prancha, laudo, contrato.
+conversas*/
+*conversas*/
+*.jsonl
+*.jsonl.zstd
+*_painel.json
+dados_painel.json
+*_mensagens.json
+*mensagens*.json
+*cliente*
+*clientes*
+# A excecao abaixo existe porque o padrao *cliente* acima engolia o proprio
+# script que GERA a lista de bloqueio. Excecao explicita, e nao padrao mais
+# frouxo: afrouxar o padrao deixaria passar dado de cliente de verdade.
+!curar_clientes.py
+*contrato*
+*laudo*
+*orcamento*.xlsx
+*orçamento*.xlsx
+*.xlsm
+*.dwg
+*.dxf
+*.pdf
+
+# --- banco de dados local: contem o trabalho da equipe ---------------------
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+
+# --- saida de execucao e cache --------------------------------------------
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+node_modules/
+*.log
+logs/
+.tmp/
+tmp/
+saida/
+saida_*/
+downloads/
+bruto/
+
+# --- o proprio relatorio de varredura --------------------------------------
+# Ele lista, com caminho e trecho, exatamente o que ha de sensivel na maquina.
+# Publicar o relatorio seria publicar o vazamento.
+relatorio_vazamento.txt
+
+# --- termos do autor: nome e sobrenome de quem publica ---------------------
+# Ficam fora do versionamento porque sao dado pessoal, e entram na curadoria
+# para o proprio nome nao ser acusado como se fosse nome de cliente.
+TERMOS-DO-AUTOR.txt

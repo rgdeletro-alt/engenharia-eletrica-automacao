@@ -105,3 +105,10 @@ relatorio_vazamento.txt
 # Ficam fora do versionamento porque sao dado pessoal, e entram na curadoria
 # para o proprio nome nao ser acusado como se fosse nome de cliente.
 TERMOS-DO-AUTOR.txt
+
+# --- termos locais: usuario do sistema, pasta de trabalho e host de tunel ---
+# Faltava aqui. Medido em 30/09/2026: com o arquivo na pasta, o `git status`
+# mostrava "?? TERMOS-LOCAIS.txt" -- a um `git add .` de publicar nome de
+# usuario, pasta de trabalho e host de tunel, que e exatamente o que este
+# repositorio promete manter fora do ar. O `.exemplo` continua entrando.
+TERMOS-LOCAIS.txt

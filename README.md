@@ -159,6 +159,42 @@ entrada do usuário ou por cofre do sistema operacional. Não existe versão
 deste código com a senha escrita dentro. Um `.env` que entra no repositório é
 uma chave privada publicada.
 
+**O selo é desenho, não texto de biblioteca.** A marca visível da assinatura é
+uma arte própria — moldura, rubrica, nome e a linha "assinado digitalmente com
+certificado ICP-Brasil" — e o motor escreve por cima só o que varia: a data e o
+código de conferência. O carimbo padrão da biblioteca fica desligado; sem isso
+saem os dois textos sobrepostos, um deles em inglês.
+
+**O selo vai ACIMA da linha de assinatura, e a posição é medida.** Em documento
+com bloco de assinatura impresso, a posição não é escolhida no olho: procura-se a
+linha que já existe no papel, mede-se a faixa livre e o selo se apoia nela,
+centrado. Foi assim que apareceu um selo colocado cerca de 60 pt abaixo da linha,
+dentro do bloco de identificação — visivelmente "quase certo", e errado. Medição
+do caso real: 0,00 pt² de sobreposição com o texto do documento e 6 pt de folga
+até a linha.
+
+**Documento que já chegou assinado por terceiro não se reescreve.** Nesse caso a
+gravação tem de ser **incremental** — o arquivo novo é o antigo com bytes
+acrescentados no fim. A prova é o prefixo: os primeiros bytes do arquivo novo são
+idênticos ao original, então a assinatura de quem assinou antes continua cobrindo
+exatamente os mesmos bytes. Regravar o PDF inteiro invalida a assinatura alheia em
+silêncio.
+
+**Campo de assinatura vazio existe para ser usado.** Se o documento já traz o
+campo, a assinatura entra nele. Criar um segundo campo ao lado deixa o campo do
+documento em branco e a assinatura em outro lugar — o leitor mostra os dois, e um
+deles vazio.
+
+**Assinar é assinar E registrar.** O código impresso no selo tem de existir no
+serviço de conferência; código que não leva a lugar nenhum promete uma
+verificação que não existe. O código sai do próprio arquivo de entrada — re-assinar
+mantém o código que já foi impresso no papel — e o registro guarda o resumo
+criptográfico do PDF assinado.
+
+**Política de assinatura é atributo assinado.** A assinatura sai na política
+ICP-Brasil, com o identificador e o qualificador dentro do CMS, e é conferida por
+validador de perfil. "Estar assinado" não basta: tem de estar **na política**.
+
 ---
 
 ## 5. Auditoria de vazamento antes de publicar
